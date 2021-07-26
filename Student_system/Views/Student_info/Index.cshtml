@@ -1,0 +1,103 @@
+﻿@model List<Student_info>
+
+
+@{
+    ViewData["Title"] = "รายชื่อนักเรียน";
+}
+
+<script>
+    var showalert = "@ViewBag.showAlert"
+    var alertmessage = "@ViewBag.AlertMessage"
+
+    if (showalert === true) {
+        alert(alertmessage)
+    }
+
+</script>
+
+
+
+<h1> จัดการสมาชิก</h1>
+<a asp-controller="student_info" asp-action="Addstudent" class="btn btn-success"> เพิ่มชื่อ</a>
+
+
+@using (Html.BeginForm("Index", "Student_info", FormMethod.Post))
+{
+    @Html.TextBox("name")
+    <input type="submit" value="Find" />
+
+}
+
+
+
+ @*<div class="col-2" id="My_Search" style="display:inline-block; margin-left:70%; margin-bottom:20px;font-weight:bold;" ;>
+
+        
+     <input type="text" class="form-control" placeholder="Find Here.....">
+        
+
+    </div>
+
+<button asp-controller="Student_info" asp-action="FindStudent"class="btn btn-info" style="margin-left:-17px; margin-bottom:3px;">
+    <span class="glyphicon glyphicon-search"></span> Search
+</button>*@
+
+
+
+
+<table class="table">
+
+    <tr>
+        <th>
+            @Html.DisplayNameFor(m => m[0].ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(m => m[0].Fname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(m => m[0].Lname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(m => m[0].Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(m => m[0].Tel)
+        </th>
+        <th>
+            รายการ
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+
+        <tr>
+            <td>
+                @Html.DisplayFor(m => item.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.Fname)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.Lname)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.Tel)
+            </td>
+
+            <td>
+                <a class="btn btn-success" role="button" asp-controller="Student_info" asp-action="Studentedit" asp-route-id="@item.ID"> แก้ไข</a>
+                <a class="btn btn-danger" role="button" asp-controller="Student_info" asp-action="Deletestudent" asp-route-id="@item.ID">ลบทิ้ง</a>
+
+            </td>
+
+
+
+        </tr>
+
+    }
+
+</table>
